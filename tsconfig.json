@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "inlineSources": true,
+        "sourceMap": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "ES5",
+            "ES6",
+            "ES2016.Array.Include"
+        ],
+        "declaration": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

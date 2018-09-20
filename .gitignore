@@ -64,3 +64,5 @@ typings/
 lib/
 
 *.iml
+
+package-lock.json

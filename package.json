@@ -1,6 +1,6 @@
 {
   "name": "pro-dj-link",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Node.JS Library for interaction with a Pioneer Pro DJ Link Network",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -11,7 +11,7 @@
     "rxjs": "^5.5.2"
   },
   "devDependencies": {
-    "@types/node": "^8.0.47",
+    "@types/node": "*",
     "typescript": "^2.5.3"
   },
   "scripts": {

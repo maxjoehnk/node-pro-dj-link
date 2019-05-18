@@ -1,15 +1,13 @@
 import { createSocket } from 'dgram';
 import { networkInterfaces } from 'os';
-import { subnet } from 'ip';
+import { subnet, toLong } from 'ip';
 import * as mixerStatus from './packets/mixer-status';
 import * as cdjStatus from './packets/cdj-status';
+import { CDJState } from './packets/cdj-status';
 import * as debug from 'debug';
 import { ANNOUNCEMENT_PORT, KEEP_ALIVE_HEADER } from './constants';
-import { toLong } from 'ip';
 import { toBuffer } from 'mac-address';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { CDJState } from './packets/cdj-status';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 const d = debug('pro-dj-link:virtual-cdj');
 
@@ -39,7 +37,7 @@ export class VirtualCdj {
         if (!addresses) {
             throw new Error('Invalid Network Device');
         }
-        const [addr] = addresses
+        const [addr] = addresses
             .filter(({ family }) => family === 'IPv4');
         if (!addr) {
             throw new Error('Invalid Network Device');
@@ -54,7 +52,7 @@ export class VirtualCdj {
             if (mixerStatus.test(data)) {
                 const status = mixerStatus.parse(data);
                 d(`Mixer Status ${status.device} (${status.name})`);
-            }else if (cdjStatus.test(data)) {
+            } else if (cdjStatus.test(data)) {
                 const status = cdjStatus.parse(data);
                 d(`CDJ Status ${status.device} (${status.name})`);
                 if (status.state.master) {
@@ -63,7 +61,7 @@ export class VirtualCdj {
                 const current = this._devices.getValue()
                     .filter(({ device }) => device !== status.device);
                 this._devices.next([...current, status]);
-            }else {
+            } else {
                 d(data);
             }
         });
@@ -109,7 +107,7 @@ export class VirtualCdj {
             }
             d('Send Keep Alive Packet');
         });
-    }
+    };
 
     get devices(): Observable<DeviceStatus[]> {
         return this._devices.asObservable();

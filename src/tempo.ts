@@ -1,6 +1,5 @@
 import * as debug from 'debug';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { createSocket } from 'dgram';
 import * as timing from './packets/timing';
 
@@ -29,7 +28,7 @@ export const track = () => {
             d(`Player ${device} (${name}): ${Math.round(speed.current)} BPM`);
             d(speed.current);
             _bpm.next(speed.current);
-        }else {
+        } else {
             d('50001', data.length, data);
         }
     });

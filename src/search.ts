@@ -1,9 +1,8 @@
 import * as debug from 'debug';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { createSocket } from 'dgram';
 import { ANNOUNCEMENT_PORT } from './constants';
 import * as keepalive from './packets/keep-alive';
-import { Observable } from 'rxjs/Observable';
 
 const d = debug('pro-dj-link:search');
 
@@ -34,7 +33,7 @@ export const search = () => {
                 mac
             } = keepalive.parse(data);
             d(`Player ${device} (${name})`, mac, ip);
-        }else {
+        } else {
             d('50000', data);
         }
     });
